@@ -1,5 +1,5 @@
 import 'package:e_commerce_grocery_shop_app/app/assets_path.dart';
-import 'package:e_commerce_grocery_shop_app/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/on_boarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _moveToNextScreen() async {
     await Future.delayed(Duration(seconds: 3));
     if (mounted) {
-      Navigator.pushNamed(context, MainBottomNavScreen.name);
+      Navigator.pushNamed(context, OnBoardingScreen.name);
     }
   }
 
