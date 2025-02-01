@@ -9,6 +9,20 @@ class AppThemeData {
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: AppColors.themeColor,
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: AppColors.themeColor,
+          fixedSize: Size.fromWidth(double.maxFinite),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          textStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     );
   }
 
@@ -18,6 +32,20 @@ class AppThemeData {
       brightness: Brightness.dark,
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: AppColors.themeColor,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: AppColors.themeColor,
+          fixedSize: Size.fromWidth(double.maxFinite),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          textStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }

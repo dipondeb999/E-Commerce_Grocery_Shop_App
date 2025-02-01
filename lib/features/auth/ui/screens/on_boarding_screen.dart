@@ -1,7 +1,8 @@
-import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_grocery_shop_app/app/assets_path.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/login_and_register_screen.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/widgets/onboarding_page_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -13,84 +14,69 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  final PageController _pageController = PageController();
   int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    OnboardingPageWidget(
+        image: AssetsPath.onBoardingImageOnePng,
+        title: 'Fresh & Healthy Grocery',
+        description: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
+    ),
+    OnboardingPageWidget(
+        image: AssetsPath.onBoardingImageTwoPng,
+        title: 'Add to Cart',
+        description: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
+    ),
+    OnboardingPageWidget(
+        image: AssetsPath.onBoardingImageThreePng,
+        title: 'Easy & Fast Delivery',
+        description: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              _currentIndex = index;
-              setState(() {});
-            },
-          ),
-          _pageDetails(
-            image: AssetsPath.onBoardingImageOnePng,
-            title: 'Fresh & Healthy Grocery',
-            subtitle: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
-          ),
-          _pageDetails(
-            image: AssetsPath.onBoardingImageTwoPng,
-            title: 'Add to Cart',
-            subtitle: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
-          ),
-          _pageDetails(
-            image: AssetsPath.onBoardingImageThreePng,
-            title: 'Easy & Fast Delivery',
-            subtitle: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
-          ),
-          _pageDetails(
-            image: AssetsPath.onBoardingImageFourPng,
-            title: 'Strain Less Groceries',
-            subtitle: '''Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.''',
-          ),
-          SizedBox(height: 50),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 32),
-              child: SmoothPageIndicator(
-                controller: _pageController,
-                count: 4,
-                onDotClicked: (index) {
-                  _pageController.jumpToPage(index);
+          Expanded(
+            child: CarouselSlider(
+              items: _pages,
+              options: CarouselOptions(
+                height: MediaQuery.of(context).size.height,
+                viewportFraction: 1.0,
+                enableInfiniteScroll: false,
+                // scrollPhysics: NeverScrollableScrollPhysics(),
+                onPageChanged: (index, reason) {
+                  _currentIndex = index;
+                  setState(() {});
                 },
               ),
             ),
           ),
+          if (_currentIndex < 2)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ElevatedButton(
+                onPressed: () {
+                  _currentIndex++;
+                },
+                child: Text('Next'),
+              ),
+            ),
+          if (_currentIndex == 2)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, LoginAndRegisterScreen.name);
+                },
+                child: Text('Get Started'),
+              ),
+            ),
+          const SizedBox(height: 80),
         ],
       ),
-    );
-  }
-
-  Widget _pageDetails({required String image, required String title, required String subtitle}) {
-    TextTheme textTheme = Theme.of(context).textTheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset(
-          image,
-          height: 250,
-        ),
-        SizedBox(height: 80),
-        Text(
-          title,
-          style: textTheme.titleLarge?.copyWith(
-              color: AppColors.themeColor,
-              fontWeight: FontWeight.w600
-          ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          subtitle,
-          textAlign: TextAlign.center,
-          style: textTheme.bodyMedium?.copyWith(color: Colors.black54),
-        ),
-      ],
     );
   }
 }
