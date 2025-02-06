@@ -1,4 +1,5 @@
 import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/widgets/or_login_with_section.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: _onTapNextButton,
                 child: Text('Login'),
               ),
+              SizedBox(height: 40),
+              OrLoginWithSection(),
+              SizedBox(height: 40),
+              _buildRegisterNowButton(textTheme),
+              SizedBox(height: 40),
             ],
           ),
         ),
@@ -126,5 +132,26 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {}
   }
 
-
+  Widget _buildRegisterNowButton(TextTheme textTheme) {
+    return Align(
+      alignment: Alignment.center,
+      child: RichText(
+        text: TextSpan(
+          text: "Don't have an account? ",
+          style: textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+          children: [
+            TextSpan(
+              text: 'Register Now',
+              style: textTheme.titleSmall?.copyWith(
+                color: AppColors.themeColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
