@@ -1,24 +1,21 @@
 import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
-import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/email_verification_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/register_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/widgets/or_login_with_section.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class EmailVerificationScreen extends StatefulWidget {
+  const EmailVerificationScreen({super.key});
 
-  static const String name = '/login-screen';
+  static const String name = '/email-verification-screen';
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<EmailVerificationScreen> createState() => _EmailVerificationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   final TextEditingController _emailTEController = TextEditingController();
-  final TextEditingController _passwordTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isObscureText = true;
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -36,34 +33,21 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               SizedBox(height: 60),
               Text(
-                'Welcome back! Glad to\nsee you, Again!',
+                'Forgot Password',
                 textAlign: TextAlign.left,
                 style: textTheme.titleLarge?.copyWith(
-                    color: AppColors.themeColor,
+                  color: AppColors.themeColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(height: 40),
-              _buildTextFormFields(),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, EmailVerificationScreen.name);
-                  },
-                  child: Text(
-                    'Forget password?',
-                    style: textTheme.titleSmall?.copyWith(
-                      color: AppColors.themeColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
+              _buildTextFormField(),
+              SizedBox(height: 20),
+              _backToSignInButton(textTheme),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _onTapNextButton,
-                child: Text('Login'),
+                child: Text('Send Code'),
               ),
               SizedBox(height: 40),
               OrLoginWithSection(),
@@ -77,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildTextFormFields() {
+  Widget _buildTextFormField() {
     return Form(
       key: _formKey,
       child: Column(
@@ -100,40 +84,31 @@ class _LoginScreenState extends State<LoginScreen> {
               return null;
             },
           ),
-          SizedBox(height: 20),
-          TextFormField(
-            controller: _passwordTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            keyboardType: TextInputType.emailAddress,
-            obscureText: _isObscureText,
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.lock),
-              suffixIcon: IconButton(
-                  onPressed: () {
-                    _isObscureText =! _isObscureText;
-                    setState(() {});
-                  },
-                  icon: Icon(_isObscureText ? Icons.visibility : Icons.visibility_off),
-              ),
-              hintText: 'Password',
-            ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter your password';
-              }
-              if (value!.length <= 6) {
-                return 'Enter a password more than 6 characters';
-              }
-              return null;
-            },
-          ),
         ],
       ),
     );
   }
 
+  Widget _backToSignInButton(TextTheme textTheme) {
+    return Align(
+      alignment: Alignment.center,
+      child: TextButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text(
+          'Back to sign in',
+          style: textTheme.titleSmall?.copyWith(
+            color: Colors.grey,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
   void _onTapNextButton() {
-    if (_formKey.currentState!.validate()) {}
+    // if (_formKey.currentState!.validate()) {}
   }
 
   Widget _buildRegisterNowButton(TextTheme textTheme) {
@@ -168,6 +143,5 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     super.dispose();
     _emailTEController.dispose();
-    _passwordTEController.dispose();
   }
 }

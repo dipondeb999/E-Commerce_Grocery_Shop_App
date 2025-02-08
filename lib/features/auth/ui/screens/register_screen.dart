@@ -131,8 +131,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               if (value?.trim().isEmpty ?? true) {
                 return 'Enter your confirm password';
               }
-              if (value!.length <= 6) {
-                return 'Enter a password more than 6 characters';
+              if (value != _passwordTEController.text) {
+                return 'Passwords do not match';
               }
               return null;
             },

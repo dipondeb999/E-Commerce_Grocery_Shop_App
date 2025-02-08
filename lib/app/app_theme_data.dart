@@ -69,6 +69,28 @@ class AppThemeData {
           ),
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: AppColors.themeColor.withOpacity(0.10),
+        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        hintStyle: TextStyle(
+          color: Colors.grey,
+          fontWeight: FontWeight.w600,
+        ),
+        prefixIconColor: Colors.grey,
+        suffixIconColor: Colors.grey,
+      ),
     );
   }
 }
