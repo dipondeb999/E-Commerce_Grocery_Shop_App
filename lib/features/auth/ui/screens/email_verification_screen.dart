@@ -1,4 +1,5 @@
 import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/register_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/widgets/or_login_with_section.dart';
 import 'package:email_validator/email_validator.dart';
@@ -46,7 +47,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               _backToSignInButton(textTheme),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _onTapNextButton,
+                onPressed: _onTapSendCodeButton,
                 child: Text('Send Code'),
               ),
               SizedBox(height: 40),
@@ -64,27 +65,23 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   Widget _buildTextFormField() {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          TextFormField(
-            controller: _emailTEController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              prefixIcon: Icon(Icons.email),
-              hintText: 'Email',
-            ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter your email address';
-              }
-              if (EmailValidator.validate(value!) == false) {
-                return 'Enter a valid email address';
-              }
-              return null;
-            },
-          ),
-        ],
+      child: TextFormField(
+        controller: _emailTEController,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.email),
+          hintText: 'Email',
+        ),
+        validator: (String? value) {
+          if (value?.trim().isEmpty ?? true) {
+            return 'Enter your email address';
+          }
+          if (EmailValidator.validate(value!) == false) {
+            return 'Enter a valid email address';
+          }
+          return null;
+        },
       ),
     );
   }
@@ -107,8 +104,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     );
   }
 
-  void _onTapNextButton() {
+  void _onTapSendCodeButton() {
     // if (_formKey.currentState!.validate()) {}
+    Navigator.pushNamed(context, OtpVerificationScreen.name);
   }
 
   Widget _buildRegisterNowButton(TextTheme textTheme) {

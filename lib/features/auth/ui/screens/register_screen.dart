@@ -47,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               _buildTextFormFields(),
               SizedBox(height: 40),
               ElevatedButton(
-                onPressed: _onTapNextButton,
+                onPressed: _onTapRegisterButton,
                 child: Text('Register'),
               ),
               SizedBox(height: 40),
@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void _onTapNextButton() {
+  void _onTapRegisterButton() {
     if (_formKey.currentState!.validate()) {}
   }
 

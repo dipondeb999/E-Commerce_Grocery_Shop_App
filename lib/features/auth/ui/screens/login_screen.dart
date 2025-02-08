@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 10),
               ElevatedButton(
-                onPressed: _onTapNextButton,
+                onPressed: _onTapLoginButton,
                 child: Text('Login'),
               ),
               SizedBox(height: 40),
@@ -132,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void _onTapNextButton() {
+  void _onTapLoginButton() {
     if (_formKey.currentState!.validate()) {}
   }
 
