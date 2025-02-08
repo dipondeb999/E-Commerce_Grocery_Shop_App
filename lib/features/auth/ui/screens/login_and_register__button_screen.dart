@@ -1,6 +1,7 @@
 import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
 import 'package:e_commerce_grocery_shop_app/app/assets_path.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/login_screen.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginAndRegisterButtonScreen extends StatelessWidget {
@@ -72,7 +73,9 @@ class LoginAndRegisterButtonScreen extends StatelessWidget {
               ),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, RegisterScreen.name);
+          },
           child: Text('Register'),
         ),
       ],

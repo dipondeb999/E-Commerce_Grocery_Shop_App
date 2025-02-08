@@ -2,6 +2,7 @@ import 'package:e_commerce_grocery_shop_app/app/app_theme_data.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/login_and_register__button_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/login_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/on_boarding_screen.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/register_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/splash_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class GroceryShopApp extends StatelessWidget {
         MainBottomNavScreen.name: (context) => MainBottomNavScreen(),
         LoginAndRegisterButtonScreen.name: (context) => LoginAndRegisterButtonScreen(),
         LoginScreen.name: (context) => LoginScreen(),
+        RegisterScreen.name: (context) => RegisterScreen(),
       },
     );
   }

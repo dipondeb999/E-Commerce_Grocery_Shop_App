@@ -1,23 +1,24 @@
 import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
-import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/register_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/widgets/or_login_with_section.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
-  static const String name = '/login-screen';
+  static const String name = '/register-screen';
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
+  final TextEditingController _confirmPasswordTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isObscureText = true;
+  bool _isPasswordObscureText = true;
+  bool _isConfirmPasswordObscureText = true;
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
@@ -38,34 +39,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 'Welcome back! Glad to\nsee you, Again!',
                 textAlign: TextAlign.left,
                 style: textTheme.titleLarge?.copyWith(
-                    color: AppColors.themeColor,
+                  color: AppColors.themeColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(height: 40),
               _buildTextFormFields(),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Forget password?',
-                    style: textTheme.titleSmall?.copyWith(
-                      color: AppColors.themeColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
+              SizedBox(height: 40),
               ElevatedButton(
                 onPressed: _onTapNextButton,
-                child: Text('Login'),
+                child: Text('Register'),
               ),
               SizedBox(height: 40),
               OrLoginWithSection(),
-              SizedBox(height: 40),
-              _buildRegisterNowButton(textTheme),
               SizedBox(height: 40),
             ],
           ),
@@ -102,21 +88,48 @@ class _LoginScreenState extends State<LoginScreen> {
             controller: _passwordTEController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             keyboardType: TextInputType.emailAddress,
-            obscureText: _isObscureText,
+            obscureText: _isPasswordObscureText,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.lock),
               suffixIcon: IconButton(
-                  onPressed: () {
-                    _isObscureText =! _isObscureText;
-                    setState(() {});
-                  },
-                  icon: Icon(_isObscureText ? Icons.visibility : Icons.visibility_off),
+                onPressed: () {
+                  _isPasswordObscureText =! _isPasswordObscureText;
+                  setState(() {});
+                },
+                icon: Icon(_isPasswordObscureText ? Icons.visibility : Icons.visibility_off),
               ),
               hintText: 'Password',
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
                 return 'Enter your password';
+              }
+              if (value!.length <= 6) {
+                return 'Enter a password more than 6 characters';
+              }
+              return null;
+            },
+          ),
+          SizedBox(height: 20),
+          TextFormField(
+            controller: _confirmPasswordTEController,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            keyboardType: TextInputType.emailAddress,
+            obscureText: _isConfirmPasswordObscureText,
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.lock),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  _isConfirmPasswordObscureText =! _isConfirmPasswordObscureText;
+                  setState(() {});
+                },
+                icon: Icon(_isConfirmPasswordObscureText ? Icons.visibility : Icons.visibility_off),
+              ),
+              hintText: 'Confirm Password',
+            ),
+            validator: (String? value) {
+              if (value?.trim().isEmpty ?? true) {
+                return 'Enter your confirm password';
               }
               if (value!.length <= 6) {
                 return 'Enter a password more than 6 characters';
@@ -133,38 +146,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {}
   }
 
-  Widget _buildRegisterNowButton(TextTheme textTheme) {
-    return Align(
-      alignment: Alignment.center,
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, RegisterScreen.name);
-        },
-        child: RichText(
-          text: TextSpan(
-            text: "Don't have an account? ",
-            style: textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-            children: [
-              TextSpan(
-                text: 'Register Now',
-                style: textTheme.titleSmall?.copyWith(
-                  color: AppColors.themeColor,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   void dispose() {
     super.dispose();
     _emailTEController.dispose();
     _passwordTEController.dispose();
+    _confirmPasswordTEController.dispose();
   }
 }
