@@ -4,6 +4,7 @@ import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/login_and_r
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/login_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/on_boarding_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/otp_verification_screen.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/password_changed_successfully_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/register_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/splash_screen.dart';
 import 'package:e_commerce_grocery_shop_app/features/common/ui/screens/main_bottom_nav_screen.dart';
@@ -29,6 +30,7 @@ class GroceryShopApp extends StatelessWidget {
         RegisterScreen.name: (context) => RegisterScreen(),
         EmailVerificationScreen.name: (context) => EmailVerificationScreen(),
         OtpVerificationScreen.name: (context) => OtpVerificationScreen(),
+        PasswordChangedSuccessfullyScreen.name: (context) => PasswordChangedSuccessfullyScreen(),
       },
     );
   }

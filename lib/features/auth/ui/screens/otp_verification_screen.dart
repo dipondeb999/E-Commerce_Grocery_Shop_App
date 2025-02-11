@@ -1,4 +1,5 @@
 import 'package:e_commerce_grocery_shop_app/app/app_colors.dart';
+import 'package:e_commerce_grocery_shop_app/features/auth/ui/screens/password_changed_successfully_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -132,6 +133,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   void _onTapVerifyButton() {
     // if (_formKey.currentState!.validate()) {}
+    Navigator.pushNamed(context, PasswordChangedSuccessfullyScreen.name);
   }
 
   @override
