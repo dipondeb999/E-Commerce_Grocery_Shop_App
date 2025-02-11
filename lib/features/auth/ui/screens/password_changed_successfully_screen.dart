@@ -57,6 +57,6 @@ class _PasswordChangedSuccessfullyScreenState
 
   void _onTapBackToLoginButton() {
     // if (_formKey.currentState!.validate()) {}
-    Navigator.pushNamed(context, LoginScreen.name);
+    Navigator.pushNamedAndRemoveUntil(context, LoginScreen.name, (p) => false);
   }
 }
